@@ -5,9 +5,33 @@
     xmlns:local="using:FinesseDS"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    mc:Ignorable="d" Loaded="Page_Loaded">
+    <Page.Resources>
+        <local:Synapse x:Key="Syn" />
+        <local:EmissionsTest x:Key="EmitTest"/>
+      
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+        <Hub x:Name="RootHub">
+            <HubSection x:Name="HubSection1" Background="{ThemeResource AppBarBackgroundThemeBrush}" Header="FinesseDS">
+                <DataTemplate>
+                    <ItemsControl DataContext="{StaticResource Syn}" ItemsSource="{Binding Emission}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding }"/>
+                                    <TextBlock Tag="{Binding}" Loaded="TextBlock_Loading" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
     </Grid>
 </Page>
